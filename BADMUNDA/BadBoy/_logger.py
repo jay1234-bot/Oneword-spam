@@ -18,7 +18,7 @@ async def new_chat_member_logger(client: Client, message: Message):
                     if message.from_user:
                         log_msg += f"👤 **Added By:** {message.from_user.mention} (`{message.from_user.id}`)\n"
                     log_msg += "━━━━━━━━━━━━━━━━━"
-                    await Client1.send_message(LOG_CHANNEL, log_msg)
+                    await client.send_message(LOG_CHANNEL, log_msg)
                 except Exception as e:
                     print(f"Group Log Error: {e}")
             break
