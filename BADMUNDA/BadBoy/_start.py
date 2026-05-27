@@ -41,32 +41,26 @@ async def _start(Badmunda: Client, message: Message):
         [InlineKeyboardButton("sᴜᴅᴏ", url="https://t.me/+TbsWobFwMPY1YjNl")]
     ]
 
-    # Loop through Clients 1 to 25
-    for i in range(1, 26):
-        client_name = f"Client{i}"
-        if client_name in globals():
-            lol = globals()[client_name]
-            if lol is not None:
-                if START_PIC.lower().endswith((".jpg", ".png")):
-                    await lol.send_photo(
-                        message.chat.id,
-                        START_PIC,
-                        caption=start_msg,
-                        reply_markup=InlineKeyboardMarkup(start_buttons),
-                    )
-                elif START_PIC.lower().endswith(".mp4"):
-                    await lol.send_video(
-                        message.chat.id,
-                        START_PIC,
-                        caption=start_msg,
-                        reply_markup=InlineKeyboardMarkup(start_buttons),
-                    )
-                else:
-                    await lol.send_message(
-                        message.chat.id,
-                        start_msg,
-                        reply_markup=InlineKeyboardMarkup(start_buttons),
-                    )
+    if START_PIC.lower().endswith((".jpg", ".png")):
+        await Badmunda.send_photo(
+            message.chat.id,
+            START_PIC,
+            caption=start_msg,
+            reply_markup=InlineKeyboardMarkup(start_buttons),
+        )
+    elif START_PIC.lower().endswith(".mp4"):
+        await Badmunda.send_video(
+            message.chat.id,
+            START_PIC,
+            caption=start_msg,
+            reply_markup=InlineKeyboardMarkup(start_buttons),
+        )
+    else:
+        await Badmunda.send_message(
+            message.chat.id,
+            start_msg,
+            reply_markup=InlineKeyboardMarkup(start_buttons),
+        )
 
     if LOG_CHANNEL:
         try:
@@ -76,6 +70,6 @@ async def _start(Badmunda: Client, message: Message):
                 log_msg += f"🔗 **Username:** @{message.from_user.username}\n"
             log_msg += f"📍 **Chat:** `{message.chat.id}`\n"
             log_msg += "━━━━━━━━━━━━━━━━━"
-            await Client1.send_message(LOG_CHANNEL, log_msg)
+            await Badmunda.send_message(LOG_CHANNEL, log_msg)
         except Exception as e:
             print(f"Start Log Error: {e}")
