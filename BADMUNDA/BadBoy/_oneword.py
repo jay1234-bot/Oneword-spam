@@ -75,18 +75,24 @@ async def oneword_cmd(Badmunda: Client, e: Message):
     await asyncio.sleep(5)
     
     while oneword_active:
-        word = words[word_index]
-        try:
-            await worker_client.send_message(
-                chat_id=e.chat.id,
-                text=word,
-                reply_to_message_id=target_msg.id
-            )
-        except Exception:
-            pass
+        for _ in range(5):
+            if not oneword_active:
+                break
+            word = words[word_index]
+            try:
+                await worker_client.send_message(
+                    chat_id=e.chat.id,
+                    text=word,
+                    reply_to_message_id=target_msg.id
+                )
+            except Exception:
+                pass
+                
+            word_index = (word_index + 1) % total_words
+            await asyncio.sleep(0.3)
             
-        word_index = (word_index + 1) % total_words
-        await asyncio.sleep(5)
+        if oneword_active:
+            await asyncio.sleep(5)
         
     if LOG_CHANNEL:
         try:
