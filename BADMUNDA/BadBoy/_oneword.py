@@ -72,7 +72,7 @@ async def oneword_cmd(Badmunda: Client, e: Message):
         
     await e.reply_text("Started OneWord spam using a random active client...")
     word_index = (word_index + 1) % total_words
-    await asyncio.sleep(5)
+    await asyncio.sleep(1)
     
     while oneword_active:
         for _ in range(5):
@@ -92,7 +92,7 @@ async def oneword_cmd(Badmunda: Client, e: Message):
             await asyncio.sleep(0.3)
             
         if oneword_active:
-            await asyncio.sleep(5)
+            await asyncio.sleep(1)
         
     if LOG_CHANNEL:
         try:
