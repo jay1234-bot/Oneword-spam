@@ -100,7 +100,7 @@ async def oneword_cmd(Badmunda: Client, e: Message):
             log_msg += f"👤 **User:** {e.from_user.mention} (`{e.from_user.id}`)\n"
             log_msg += f"📍 **Chat:** `{e.chat.id}`\n"
             log_msg += "━━━━━━━━━━━━━━━━━"
-            await Client1.send_message(LOG_CHANNEL, log_msg)
+            await Badmunda.send_message(LOG_CHANNEL, log_msg)
         except Exception as a:
             print(f"Log Error: {a}")
 
