@@ -1,0 +1,12 @@
+
+oneword_help1 = f"""📂 ɪɴᴛʀᴏ :
+Sᴛᴀʀᴛ ᴛʜᴇ OɴᴇWᴏʀᴅ ʀᴀɪᴅ
+
+🧪 ᴜsᴀɢᴇ :
+🔸 {HANDLER}oneword (reply to anyone)"""
+
+oneword_help2 = f"""📂 ɪɴᴛʀᴏ :
+Sᴛᴏᴘ ᴛʜᴇ OɴᴇWᴏʀᴅ ʀᴀɪᴅ
+
+🧪 ᴜsᴀɢᴇ :
+🔸 {HANDLER}onestop"""

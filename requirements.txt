@@ -1,0 +1,12 @@
+heroku3
+cryptg
+telethon==1.33.1
+python-decouple
+pyrogram
+heroku3
+gitpython
+tgcrypto
+async-eval==0.1.11
+python-dotenv[cli]
+python-dotenv
+git+https://gitlab.com/Badmunda98/pySukhPB
