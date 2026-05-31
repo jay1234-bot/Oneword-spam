@@ -37,8 +37,17 @@ if SUDO_USERS:
     except Exception as e:
         print("Sudo list error:", e)
 
-if OWNER_ID and OWNER_ID not in sudos:
-    sudos.append(OWNER_ID)
+# Add all owner IDs to sudos list if they're defined
+if hasattr(sys, 'modules') or True:  # Import OWNER_IDS if available
+    try:
+        from .Config import OWNER_IDS
+        for owner_id in OWNER_IDS:
+            if owner_id and owner_id not in sudos:
+                sudos.append(owner_id)
+    except ImportError:
+        # Fallback to single OWNER_ID
+        if OWNER_ID and OWNER_ID not in sudos:
+            sudos.append(OWNER_ID)
 
 def save_sudos():
     with open("sudos.txt", "w") as f:
@@ -51,10 +60,17 @@ async def is_sudo(_, __, message):
     return (message.from_user.id in sudos) or (message.from_user.username and message.from_user.username in sudos)
 
 def is_protected(user):
-    from .Config import OWNER_ID
-    # Check owner
-    if str(user.id) == str(OWNER_ID) or (user.username and str(user.username) == str(OWNER_ID)):
-        return "owner"
+    from .Config import OWNER_ID, OWNER_IDS
+    # Check if user is one of the owners
+    try:
+        for owner_id in OWNER_IDS:
+            if str(user.id) == str(owner_id) or (user.username and str(user.username) == str(owner_id)):
+                return "owner"
+    except:
+        # Fallback to single owner
+        if str(user.id) == str(OWNER_ID) or (user.username and str(user.username) == str(OWNER_ID)):
+            return "owner"
+    
     # Check sudo
     if user.id in sudos or (user.username and user.username in sudos):
         return "sudo"

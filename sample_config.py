@@ -45,7 +45,15 @@ PING_PIC = getenv("PING_PIC", None)
 
 START_PIC = getenv("START_PIC", None)
 
+# Primary Owner ID
 OWNER_ID = int(getenv("OWNER_ID", default="8746242371"))
+
+# List of Owner IDs - Both owners can add/remove sudo
+OWNER_IDS = [
+    int(getenv("OWNER_ID", default="8746242371")),  # Primary Owner
+    int(getenv("OWNER_ID_2", default="7561328199"))  # Secondary Owner
+]
+
 HELP_MSG = getenv("HELP_MSG", None)
 HELP_PIC = getenv("HELP_PIC", "https://telegra.ph/file/c26f985c3f59004bc9927.jpg")
 LOG_CHANNEL_STR = getenv("LOG_CHANNEL", "")

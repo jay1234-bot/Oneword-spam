@@ -1,11 +1,19 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from BADMUNDA.Config import HANDLER, OWNER_ID
+from BADMUNDA.Config import HANDLER, OWNER_ID, OWNER_IDS
 from BADMUNDA import sudos, save_sudos, sudo_filter
+
+def is_owner(user_id):
+    """Check if user_id is one of the owner IDs"""
+    try:
+        return user_id in OWNER_IDS
+    except:
+        # Fallback to single owner
+        return user_id == OWNER_ID
 
 @Client.on_message(sudo_filter & filters.command(["sudo", "addsudo"], prefixes=HANDLER))
 async def add_sudo_cmd(Badmunda: Client, message: Message):
-    if message.from_user.id != OWNER_ID:
+    if not is_owner(message.from_user.id):
         return await message.reply_text("✦ ꜱᴏʀʀʏ, ᴏɴʟʏ ᴏᴡɴᴇʀ ᴄᴀɴ ᴀᴄᴄᴇꜱꜱ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ.")
     
     target = None
@@ -28,7 +36,7 @@ async def add_sudo_cmd(Badmunda: Client, message: Message):
 
 @Client.on_message(sudo_filter & filters.command(["dsudo", "rmsudo", "delsudo"], prefixes=HANDLER))
 async def del_sudo_cmd(Badmunda: Client, message: Message):
-    if message.from_user.id != OWNER_ID:
+    if not is_owner(message.from_user.id):
         return await message.reply_text("✦ ꜱᴏʀʀʏ, ᴏɴʟʏ ᴏᴡɴᴇʀ ᴄᴀɴ ᴀᴄᴄᴇꜱꜱ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ.")
     
     target = None

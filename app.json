@@ -146,6 +146,14 @@
             "description": "Owner Id Get It From start @MissRose_bot , then do /id",
             "value": ""        
         },
+        "OWNER_ID": {
+            "description": "Primary Owner ID (Get it from /id command in Telegram)",
+            "value": "8746242371"
+        },
+        "OWNER_ID_2": {
+            "description": "Secondary Owner ID (Get it from /id command in Telegram)",
+            "value": "7561328199"
+        },
         "HANDLER": {
             "description": "HANDLER",
             "value": "/",
